@@ -1,0 +1,26 @@
+{
+  "name": "todo-list",
+  "version": "1.0.0",
+  "description": "A simple ToDo list written in Angular2 with Ionic2",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mateusmcg/todo-list.git"
+  },
+  "keywords": [
+    "todo",
+    "list",
+    "angular2",
+    "ionic2",
+    "app"
+  ],
+  "author": "Mateus Cerqueira <mateus.mcg@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mateusmcg/todo-list/issues"
+  },
+  "homepage": "https://github.com/mateusmcg/todo-list#readme"
+}

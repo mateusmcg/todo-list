@@ -8,11 +8,14 @@
 </ion-header>
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
-
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <ion-list>
+    <button ion-item *ngFor="let projeto of projetos" (click)="itemTapped($event, projeto)">
+      {{projeto.id}} - {{projeto.nome}}
+      <br>
+      {{projeto.dataCriacao}}
+      <div class="item-note" item-right>
+        {{projeto.descricao}}
+      </div>
+    </button>
+  </ion-list>
 </ion-content>

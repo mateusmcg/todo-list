@@ -1,0 +1,26 @@
+.login-bg{
+    background-image: url(../assets/img/login-bg.png);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+}
+
+.login-bg .item-md{
+    background-color: transparent;
+}
+
+.login-bg .item-ios{
+    background-color: transparent;
+}
+
+.login-bg .item-wp{
+    background-color: transparent;
+}
+
+.center-login{
+    margin-top: 135px;
+}
+
+input{
+    color: white;
+}

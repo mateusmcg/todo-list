@@ -1,5 +1,5 @@
-import { Component, ViewChild, NgZone } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Nav, Platform, MenuController } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
 
 import { Tarefas } from '../pages/tarefas/tarefas';
@@ -17,29 +17,19 @@ export class MyApp {
   rootPage: any = Login;
   userName: String = '';
 
-  pages: Array<{ title: string, component: any }>;
+  pages: Array<{ title: string, component: any, icon: string }>;
 
   constructor(public platform: Platform,
     public auth: Auth,
     public user: User,
-    public zone: NgZone) {
+    public menu: MenuController) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Tarefas', component: Tarefas },
-      { title: 'Projetos', component: Projetos }
+      { title: 'Tarefas', component: Tarefas, icon: 'book' },
+      { title: 'Projetos', component: Projetos, icon: 'attach' }
     ];
-
-    // ToDo: Arrumar forma como menu é carregado após o login (Evento?).
-    if (this.auth.isAuthenticated()) {
-      var $this = this;
-      setTimeout(function(){
-        $this.rootPage = Tarefas;
-        $this.userName = $this.user.details.name;
-      }, 500);
-    }
-
   }
 
   initializeApp() {
@@ -47,6 +37,12 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
+
+      if (this.auth.isAuthenticated()) {
+        this.rootPage = Tarefas;
+        console.debug('Usuário Logado', this.user);
+        this.menu.swipeEnable(true, 'main-menu');
+      }
     });
   }
 

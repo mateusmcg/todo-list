@@ -1,0 +1,33 @@
+<ion-header id="appHeader">
+	<ion-navbar>
+		<ion-buttons left>
+			<button ion-button icon-only (click)="closeModal()">
+            <ion-icon name="close"></ion-icon>
+        </button>
+		</ion-buttons>
+		<ion-title class="title">{{acao == 'edit' ? 'Editar' : 'Novo'}} Projeto</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<ion-list class="center-signup">
+		<ion-item>
+			<ion-label stacked>Nome</ion-label>
+			<ion-input type="text" [(ngModel)]="projeto.nome" maxlength="30"></ion-input>
+		</ion-item>
+
+		<ion-item>
+			<ion-label stacked>Descrição</ion-label>
+			<ion-textarea type="email" [(ngModel)]="projeto.descricao" rows="4" maxlength="200"></ion-textarea>
+		</ion-item>
+
+		<ion-item *ngIf="acao == 'edit'">
+			<ion-label stacked>Data Criação</ion-label>
+			<ion-datetime displayFormat="DD/MM/YYYY HH:mm:ss" [(ngModel)]="projeto.dataCriacao" disabled="true"></ion-datetime>
+		</ion-item>
+
+		<ion-item>
+			<button ion-button color="secondary" block (click)="signup($event, name, email, password)">{{acao == 'edit' ? 'Atualizar' : 'Criar'}}</button>
+		</ion-item>
+	</ion-list>
+</ion-content>

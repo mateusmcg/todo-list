@@ -1,13 +1,15 @@
-<ion-header id="signUpHeader">
+<ion-header id="appHeader">
 	<ion-navbar>
-		<button ion-button menuToggle (click)="closeModal()">
-			<ion-icon name="close"></ion-icon>
-		</button>
+		<ion-buttons left>
+			<button ion-button icon-only (click)="closeModal()">
+            <ion-icon name="close"></ion-icon>
+        </button>
+		</ion-buttons>
 		<ion-title class="title">Cadastre-se</ion-title>
 	</ion-navbar>
 </ion-header>
 
-<ion-content class="bg">
+<ion-content>
 	<ion-list class="center-signup">
 		<ion-item>
 			<ion-label stacked>Nome</ion-label>

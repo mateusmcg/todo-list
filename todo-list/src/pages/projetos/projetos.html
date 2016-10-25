@@ -1,21 +1,32 @@
-<ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
+<ion-header id="appHeader">
+	<ion-navbar>
+		<button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Projetos</ion-title>
-  </ion-navbar>
+		<ion-title>Projetos</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="addProjeto()"><ion-icon name="add"></ion-icon></button>
+    </ion-buttons>
+	</ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-list>
-    <button ion-item *ngFor="let projeto of projetos" (click)="itemTapped($event, projeto)">
-      {{projeto.id}} - {{projeto.nome}}
-      <br>
-      {{projeto.dataCriacao}}
-      <div class="item-note" item-right>
-        {{projeto.descricao}}
-      </div>
-    </button>
-  </ion-list>
+<ion-content>
+	<ion-list>
+		<ion-item-sliding class="item-list" *ngFor="let projeto of projetos" (click)="detalharProjeto($event, projeto)">
+      <ion-item class="item-list">
+        <h2>{{projeto.nome}}</h2>
+        <p>{{projeto.descricao}}</p>
+      </ion-item>
+      <ion-item-options side="right">
+        <button class="side-button" ion-button color="Primary" (click)="editarProjeto($event, projeto.id)">
+           <ion-icon name="create" class="side-icon-size"></ion-icon>
+           <span>Editar</span>
+        </button>
+        <button class="side-button" ion-button color="danger" (click)="removerProjeto($event, projeto.id)">
+           <ion-icon name="trash" class="side-icon-size"></ion-icon>
+           <span>Remover</span>
+        </button>
+      </ion-item-options>
+		</ion-item-sliding>
+	</ion-list>
 </ion-content>

@@ -1,19 +1,16 @@
-.login-bg{
-    background-image: url(../assets/img/login-bg.png);
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
+#loginPage{
+    background-color: #203040;
 }
 
-.login-bg .item-md{
+#loginPage .item-md{
     background-color: transparent;
 }
 
-.login-bg .item-ios{
+#loginPage .item-ios{
     background-color: transparent;
 }
 
-.login-bg .item-wp{
+#loginPage .item-wp{
     background-color: transparent;
 }
 
@@ -21,6 +18,6 @@
     margin-top: 135px;
 }
 
-input{
-    color: white;
+#loginPage input{
+    color: white !important;
 }

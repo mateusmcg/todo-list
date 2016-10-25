@@ -1,38 +1,62 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { NavController, NavParams, MenuController } from 'ionic-angular';
+import { NavController, NavParams, MenuController, LoadingController } from 'ionic-angular';
+
+import { ProjetoService } from '../../app/services/projeto.service';
+import { Projeto } from '../../app/model/projeto';
 
 @Component({
-  selector: 'page-page2',
   templateUrl: 'tarefas.html'
 })
-export class Tarefas {
+export class Tarefas implements OnInit, OnDestroy{
   selectedItem: any;
   icons: string[];
   items: Array<{title: string, note: string, icon: string}>;
+  projetos: Array<Projeto>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public menu: MenuController) {
-    // If we navigated to this page, we will have an item available as a nav param
-    this.selectedItem = navParams.get('item');
-
-    // Let's populate this page with some filler content for funzies
-    this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane',
-    'american-football', 'boat', 'bluetooth', 'build'];
-
-    this.items = [];
-    for (let i = 1; i < 11; i++) {
-      this.items.push({
-        title: 'Item ' + i,
-        note: 'This is item #' + i,
-        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-      });
-    }
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public menu: MenuController,
+              public projetoService: ProjetoService,
+              public loadingCtrl: LoadingController) {
+    
   }
 
-  itemTapped(event, item) {
-    // That's right, we're pushing to ourselves!
-    this.navCtrl.push(Tarefas, {
-      item: item
-    });
+  ngOnInit(){
+    let loadingAlert = this.loadingCtrl.create({
+            spinner: 'crescent',
+            content: 'Carregando tarefas...'
+        });
+        loadingAlert.present();
+    this.projetoService.getAll().subscribe((result) => {
+      this.projetos = result.map((item) => new Projeto(item._id, item.nome, item.descricao, item.dataCriacao, item.tarefas));
+      console.log(result);
+      console.log(this.projetos);
+      loadingAlert.dismiss();
+    }, (error) => {
+      console.log(error);
+      alert('Estamos com problemas :(\n Tente novamente mais tarde.');
+      loadingAlert.dismiss();
+    })
+  }
+
+  ngOnDestroy(){
+
+  }
+
+  detalharTarefa(evt, id){
+
+  }
+
+  editarTarefa(evt, id){
+
+  }
+
+  removerTarefa(evt, id){
+
+  }
+
+  concluirTarefa(evt, id){
+    
   }
 }

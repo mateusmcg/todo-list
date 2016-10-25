@@ -1,23 +1,45 @@
-<ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
+<ion-header id="appHeader">
+	<ion-navbar>
+		<button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Tarefas</ion-title>
-  </ion-navbar>
+		<ion-title>Tarefas</ion-title>
+		<ion-buttons end>
+			<button ion-button icon-only (click)="addTarefas()"><ion-icon name="add"></ion-icon></button>
+		</ion-buttons>
+	</ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon [name]="item.icon" item-left></ion-icon>
-      {{item.title}}
-      <div class="item-note" item-right>
-        {{item.note}}
-      </div>
-    </button>
-  </ion-list>
-  <div *ngIf="selectedItem" padding>
-    You navigated here from <b>{{selectedItem.title}}</b>
-  </div>
+	<ion-list *ngFor="let projeto of projetos" class="no-space">
+		<ion-item-divider>{{projeto.nome}}</ion-item-divider>
+		<ion-item *ngIf="projeto.tarefas.length == 0">
+			<p>Nenhuma tarefa cadastrada.</p>
+		</ion-item>
+		<div *ngIf="projeto.tarefas.length > 0">
+			<ion-item-sliding class="item-list" *ngFor="let tarefa of projeto.tarefas" (click)="detalharTarefa($event, tarefa)">
+				<ion-item class="item-list" [ngSwitch]="tarefa.prioridade">
+					<h2>{{tarefa.descricao}}</h2>
+					<p>{{tarefa.dataLimite}}</p>
+					<span item-right class="prioridade" *ngSwitchCase="1">!</span>
+					<span item-right class="prioridade" *ngSwitchCase="2">!!</span>
+					<span item-right class="prioridade" *ngSwitchCase="3">!!!</span>
+				</ion-item>
+				<ion-item-options side="right">
+					<button class="side-button" ion-button color="secondary" (click)="concluirTarefa($event, tarefa.id)">
+            <ion-icon name="checkmark" class="side-icon-size"></ion-icon>
+            <span>Concluir</span>
+          </button>
+					<button class="side-button" ion-button (click)="editarTarefa($event, tarefa.id)">
+            <ion-icon name="create" class="side-icon-size"></ion-icon>
+            <span>Editar</span>
+          </button>
+					<button class="side-button" ion-button color="danger" (click)="removerTarefa($event, tarefa.id)">
+            <ion-icon name="trash" class="side-icon-size"></ion-icon>
+            <span>Remover</span>
+          </button>
+				</ion-item-options>
+			</ion-item-sliding>
+		</div>
+	</ion-list>
 </ion-content>

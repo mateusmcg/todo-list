@@ -6,6 +6,7 @@ import { MyApp } from './app.component';
 
 import { Tarefas } from '../pages/tarefas/tarefas';
 import { Projetos } from '../pages/projetos/projetos';
+import { AddEditProjeto } from '../pages/projetos/addEdit';
 import { Login } from '../pages/login/login';
 import { Cadastro } from '../pages/cadastro/cadastro';
 
@@ -25,7 +26,8 @@ const cloudSettings: CloudSettings = {
     Tarefas,
     Projetos,
     Login,
-    Cadastro
+    Cadastro,
+    AddEditProjeto
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -38,7 +40,8 @@ const cloudSettings: CloudSettings = {
     Tarefas,
     Projetos,
     Login,
-    Cadastro
+    Cadastro,
+    AddEditProjeto
   ],
   providers: [
     ProjetoService
